@@ -151,3 +151,5 @@ exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 set completeopt=menu,preview
 " golang のファイル保存時に Linter を実行
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow 
+" go format
+autocmd BufWritePre *.go Fmt
