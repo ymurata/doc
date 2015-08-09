@@ -140,6 +140,11 @@ autocmd MyAutoCmd FileType help,qf nnoremap <buffer> q <C-w>c
 " w!! でスーパーユーザーとして保存（sudoが使える環境限定）
 cmap w!! w !sudo tee > /dev/null %
 
+" NERDTree の設定
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+let g:NERDTreeDirArrows=0
+let g:NERDTreeMouseMode=0
+
 " for golang
 
 " golint のプラグイン
@@ -153,3 +158,6 @@ set completeopt=menu,preview
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow 
 " go format
 autocmd BufWritePre *.go Fmt
+
+" for pgsql
+autocmd BufNewFile,BufRead *.sql setf pgsql
