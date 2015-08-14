@@ -21,17 +21,21 @@ if has('vim_starting')
     NeoBundle 'VimClojure'
     NeoBundle 'Shougo/vimshell'
     NeoBundle 'Shougo/unite.vim'
+    NeoBundle 'Shougo/unite-outline'
     NeoBundle 'Shougo/neocomplcache'
-    NeoBundle 'Shougo/neosnippet' 
+    NeoBundle 'Shougo/neosnippet'
     NeoBundle 'jpalardy/vim-slime'
     NeoBundle 'scrooloose/syntastic'
     NeoBundle 'Shougo/neosnippet-snippets'
     NeoBundle 'scrooloose/nerdtree'
+    NeoBundle 'thinca/vim-quickrun'
+    NeoBundle 'kana/vim-operator-user'
+    NeoBundle 'kana/vim-textobj-user'
+    NeoBundle 'kana/vim-operator-replace'
     ""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
 
     "" for golona
     NeoBundle 'vim-jp/vim-go-extra'
-    
     " 構文チェック
     NeoBundle 'scrooloose/syntastic'
     let g:syntastic_mode_map = { 'mode': 'passive',
@@ -41,6 +45,13 @@ if has('vim_starting')
     NeoBundle "tyru/caw.vim.git"
     nmap <C-K> <Plug>(caw:i:toggle)
     vmap <C-K> <Plug>(caw:i:toggle)
+
+    "" for python
+    NeoBundle 'davidhalter/jedi-vim'
+    NeoBundle 'andviro/flake8-vim'
+    ""NeoBundle 'kevinw/pyflakes-vim'
+    NeoBundle 'hynek/vim-python-pep8-indent'
+    NeoBundle 'bps/vim-textobj-python'
 
     call neobundle#end()
 
@@ -161,3 +172,57 @@ autocmd BufWritePre *.go Fmt
 
 " for pgsql
 autocmd BufNewFile,BufRead *.sql setf pgsql
+
+"" for python
+" .vim/after/ftplugin/python.vim
+if exists('b:did_ftplugin_python')
+    finish
+endif
+let b:did_ftplugin_python = 1
+
+setlocal smarttab
+setlocal expandtab
+setlocal tabstop=4
+setlocal shiftwidth=4
+setlocal foldmethod=indent
+setlocal commentstring=#%s
+
+" - af: a function
+" - if: inner function
+" - ac: a class
+" - ic: inner class
+
+" this plugin has aditional key-bind
+"  -  '[pf', ']pf': move to next/previous function
+"  -  '[pc', ']pc': move to next/previous class
+xmap <buffer> af <Plug>(textobj-python-function-a)
+omap <buffer> af <Plug>(textobj-python-function-a)
+xmap <buffer> if <Plug>(textobj-python-function-i)
+omap <buffer> if <Plug>(textobj-python-function-i)
+xmap <buffer> ac <Plug>(textobj-python-class-a)
+omap <buffer> ac <Plug>(textobj-python-class-a)
+xmap <buffer> ic <Plug>(textobj-python-class-i)
+omap <buffer> ic <Plug>(textobj-python-class-i)
+
+
+if version < 600
+  syntax clear
+elseif exists('b:current_after_syntax')
+  finish
+endif
+
+" We need nocompatible mode in order to continue lines with backslashes.
+" Original setting will be restored.
+let s:cpo_save = &cpo
+set cpo&vim
+
+syn match pythonOperator "\(+\|=\|-\|\^\|\*\)"
+syn match pythonDelimiter "\(,\|\.\|:\)"
+syn keyword pythonSpecialWord self
+
+hi link pythonSpecialWord    Special
+hi link pythonDelimiter      Special
+
+let b:current_after_syntax = 'python'
+
+let &cpo = s:cpo_save
