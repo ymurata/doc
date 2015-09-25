@@ -26,3 +26,10 @@ export LC_MESSAGES='ja_JP.UTF-8'
 #export GOROOT=/usr/local/opt/go/libexec
 #export GOPATH=$HOME/gocode
 #export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# for postgres
+PATH=$PATH:$HOME/bin:/usr/local/pgsql/bin
+export POSTGRES_HOME=/usr/local/pgsql
+export PGDATA=/data/pgdata
+export PGLIB=$POSTGRES_HOME/lib
+export LD_LIBRARY_PATH=$POSTGRES_HOME/lib
