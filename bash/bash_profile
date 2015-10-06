@@ -9,7 +9,7 @@ alias sc='screen'
 alias ps='ps --sort=start_time'
 
 # 環境変数
-export PATH=$PATH:/sbin:/usr/sbin # パス
+#export PATH=$PATH:/sbin:/usr/sbin # パス
 export PAGER='/usr/bin/lv -c' # man とかで使われる
 export EDITOR='/usr/bin/vim' # visudo とかで使われる
 export HISTSIZE=100000 # これだけコマンド履歴を残す
@@ -28,8 +28,11 @@ export LC_MESSAGES='ja_JP.UTF-8'
 #export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # for postgres
-PATH=$PATH:$HOME/bin:/usr/local/pgsql/bin
-export POSTGRES_HOME=/usr/local/pgsql
-export PGDATA=/data/pgdata
-export PGLIB=$POSTGRES_HOME/lib
-export LD_LIBRARY_PATH=$POSTGRES_HOME/lib
+#PATH=$PATH:$HOME/bin:/usr/local/pgsql/bin
+#export POSTGRES_HOME=/usr/local/pgsql
+#export PGDATA=/data/pgdata
+#export PGLIB=$POSTGRES_HOME/lib
+#export LD_LIBRARY_PATH=$POSTGRES_HOME/lib
+
+# node.js
+#export PATH=$HOME/.nodebrew/current/bin:$PATH
