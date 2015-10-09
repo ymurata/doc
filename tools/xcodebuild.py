@@ -27,8 +27,9 @@ def option():
 
 
 def doBuildCmd(opts):
-    cmd = "xcodebuild -exportArchive -archivePath " + opts.path + " -exportPath ~/Desktop/Ipa/" + opts.type + "/" + opts.type + " -exportFormat ipa -exportProvisioningProfile " + opts.type
+    cmd = "xcodebuild -exportArchive -archivePath " + "\ ".join(opts.path.split(" ")) + " -exportPath ~/Desktop/Ipa/" + opts.type + "/" + opts.type + " -exportFormat ipa -exportProvisioningProfile " + opts.type
     print("/****** cmd")
+    print(opts)
     print(cmd)
     print("/****** cmd")
 
