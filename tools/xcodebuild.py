@@ -1,43 +1,33 @@
 # -*- coding: utf-8 -*-
 import subprocess
 import sys
-from optparse import OptionParser
+import argparse
 
 
 def option():
-    parser = OptionParser()
-    parser.add_option(
-        "-a",
-        "--archive",
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-t",
+        "--type",
+        type=str,
         action="store",
-        type="string",
-        dest="archivePath",
-        help="path of archive"
+        required=True,
+        help="Ureserve"
     )
-
-    parser.add_option(
-        "-f",
-        "--file",
-        action="store",
-        type="string",
-        dest="file",
-        help="ipa file name"
-    )
-
-    parser.add_option(
+    parser.add_argument(
         "-p",
-        "--profile",
+        "--path",
+        type=str,
         action="store",
-        type="string",
-        dest="profileName",
-        help="Ureserve or Resebook or Resty"
+        required=True,
+        help="archive path"
     )
 
     return parser.parse_args()
 
 
-def doBuildCmd(args):
-    cmd = "xcodebuild -exportArchive -archivePath " + args.archivePath + " -exportPath ~/Desctop/Ipa/" + args.file + " -exportFormat ipa -exportProvisioningProfile " + args.profileName
+def doBuildCmd(opts):
+    cmd = "xcodebuild -exportArchive -archivePath " + opts.path + " -exportPath ~/Desktop/Ipa/" + opts.type + "/" + opts.type + " -exportFormat ipa -exportProvisioningProfile " + opts.type
     print("/****** cmd")
     print(cmd)
     print("/****** cmd")
@@ -48,5 +38,5 @@ def doBuildCmd(args):
 
 if __name__ == "__main__":
     argvs = sys.argv
-    opt, arg = option()
-    doBuildCmd(opt)
+    opts = option()
+    doBuildCmd(opts)
