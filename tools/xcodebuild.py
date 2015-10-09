@@ -2,6 +2,7 @@
 import subprocess
 import sys
 import argparse
+import datetime
 
 
 def option():
@@ -27,11 +28,12 @@ def option():
 
 
 def doBuildCmd(opts):
-    cmd = "xcodebuild -exportArchive -archivePath " + "\ ".join(opts.path.split(" ")) + " -exportPath ~/Desktop/Ipa/" + opts.type + "/" + opts.type + " -exportFormat ipa -exportProvisioningProfile " + opts.type
+    d = datetime.now()
+    dstr = d.strftime("%Y/%m/%d %Y/%m/%d_%H:%M:%S")
+    cmd = "xcodebuild -exportArchive -archivePath " + "\ ".join(opts.path.split(" ")) + " -exportPath ~/Desktop/Ipa/" + opts.type + "/" + opts.type + " -exportFormat ipa -exportProvisioningProfile " + opts.type + "." + dstr
+
     print("/****** cmd")
-    print(opts)
     print(cmd)
-    print("/****** cmd")
 
     res = subprocess.check_output(cmd.split(" "))
     print(res)
