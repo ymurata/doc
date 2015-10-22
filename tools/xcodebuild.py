@@ -32,9 +32,9 @@ def doBuildCmd(opts):
     dstr = d.strftime("%Y-%m-%d-%H:%M:%S")
     cmd = "xcodebuild$-exportArchive$-archivePath$" + opts.path + "$-exportPath$~/Desktop/Ipa/" + opts.type + "/" + opts.type + "." + dstr + "$-exportFormat$ipa$-exportProvisioningProfile$" + opts.type
 
-    print("/****** cmd")
-    print(cmd.split("$"))
-    print("\ ".join(opts.path.split(" ")))
+    print("--------- cmd")
+    print(cmd)
+    print("--------- cmd")
 
     res = subprocess.check_output(cmd.split("$"))
     print(res)
