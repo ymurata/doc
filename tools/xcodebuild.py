@@ -35,7 +35,7 @@ def doBuildCmd(opts):
     print("/****** cmd")
     print(cmd)
 
-    res = subprocess.check_output(cmd.split(" "))
+    res = subprocess.check_output(cmd)
     print(res)
 
 
