@@ -33,9 +33,9 @@ def doBuildCmd(opts):
     cmd = "xcodebuild -exportArchive -archivePath " + "\ ".join(opts.path.split(" ")) + " -exportPath ~/Desktop/Ipa/" + opts.type + "/" + opts.type + "." + dstr + " -exportFormat ipa -exportProvisioningProfile " + opts.type
 
     print("/****** cmd")
-    print(cmd)
+    print(cmd.split(" "))
 
-    res = subprocess.check_output(cmd)
+    res = subprocess.check_output(cmd.split(" "))
     print(res)
 
 
