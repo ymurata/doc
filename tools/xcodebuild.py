@@ -29,7 +29,7 @@ def option():
 
 def doBuildCmd(opts):
     d = datetime.datetime.now()
-    dstr = d.strftime("%Y/%m/%d %Y/%m/%d_%H:%M:%S")
+    dstr = d.strftime("%Y/%m/%d_%H:%M:%S")
     cmd = "xcodebuild -exportArchive -archivePath " + "\ ".join(opts.path.split(" ")) + " -exportPath ~/Desktop/Ipa/" + opts.type + "/" + opts.type + "." + dstr + " -exportFormat ipa -exportProvisioningProfile " + opts.type
 
     print("/****** cmd")
