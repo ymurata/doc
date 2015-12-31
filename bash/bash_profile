@@ -36,3 +36,6 @@ export LC_MESSAGES='ja_JP.UTF-8'
 
 # node.js
 #export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+# for embulk
+export PATH="$HOME/.embulk/bin:$PATH"
