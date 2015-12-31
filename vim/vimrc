@@ -41,6 +41,7 @@ if has('vim_starting')
 
     "" for golona
     NeoBundle 'vim-jp/vim-go-extra'
+    NeoBundle 'fatih/vim-go'
     " 構文チェック
     NeoBundle 'scrooloose/syntastic'
     let g:syntastic_mode_map = { 'mode': 'passive',
