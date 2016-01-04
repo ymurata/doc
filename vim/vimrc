@@ -65,6 +65,9 @@ if has('vim_starting')
     filetype indent on
     syntax on
 
+" for :sh command
+set shell=bash\ --login
+
 " for serach option
 set ignorecase          " 大文字小文字を区別しない
 set smartcase           " 検索文字に大文字がある場合は大文字小文字を区別
