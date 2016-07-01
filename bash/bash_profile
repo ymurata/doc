@@ -7,6 +7,7 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias sc='screen'
 alias ps='ps --sort=start_time'
+alias vim=nvim
 
 # 環境変数
 #export PATH=$PATH:/sbin:/usr/sbin # パス
@@ -16,6 +17,9 @@ export HISTSIZE=100000 # これだけコマンド履歴を残す
 export LANG='ja_JP.UTF-8' # 以下 3 つ文字コード
 export LC_ALL='ja_JP.UTF-8'
 export LC_MESSAGES='ja_JP.UTF-8'
+
+# for neovim
+export XDG_CONFIG_HOME=$HOME/.config
 
 # for python
 export PYENV_ROOT="$HOME/.pyenv"
