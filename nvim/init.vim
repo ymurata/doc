@@ -38,6 +38,12 @@ set background=dark
 let g:hybrid_use_iTerm_colors = 1
 colorscheme hybrid
 
+
+" indentLine
+let g:indentLine_color_term = 111
+let g:indentLine_color_gui = '#708090'
+let g:indentLine_char = '┆'
+
 " for serach option
 set ignorecase          " 大文字小文字を区別しない
 set smartcase           " 検索文字に大文字がある場合は大文字小文字を区別
@@ -173,8 +179,6 @@ endfunction
 " Shift + F で自動修正
 autocmd FileType python nnoremap <S-f> :call Autopep8()<CR>
 
-
-
 " for golang
 " golint のプラグイン
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
@@ -187,6 +191,7 @@ set completeopt=menu,preview
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow 
 " go format
 autocmd BufWritePre *.go Fmt
+
 let g:syntastic_mode_map = { 'mode': 'passive',
-    \ 'active_filetypes': ['go'] }
+    \ 'active_filetypes': ['go', 'python'] }
 let g:syntastic_go_checkers = ['go', 'golint']

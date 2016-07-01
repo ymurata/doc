@@ -48,6 +48,9 @@ repo = 'tyru/caw.vim.git'
 [[plugins]]
 repo = 'vim-scripts/Align'
 
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+
 [[plugins]] # hybrid
 repo = 'w0ng/vim-hybrid'
 
