@@ -195,3 +195,6 @@ autocmd BufWritePre *.go Fmt
 let g:syntastic_mode_map = { 'mode': 'passive',
     \ 'active_filetypes': ['go', 'python'] }
 let g:syntastic_go_checkers = ['go', 'golint']
+
+" for digdag
+au BufNewFile,BufRead *.dig            setf yaml
