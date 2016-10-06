@@ -35,6 +35,7 @@ if has('vim_starting') && dein#check_install()
 endif
 
 let g:python3_host_prog = expand('$HOME') . '/.pyenv/shims/python3'
+let g:jedi#force_py_version=3
 
 " colorsheme
 syntax on
