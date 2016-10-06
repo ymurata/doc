@@ -18,19 +18,23 @@ endif
 let &runtimepath = s:dein_repo_dir .",". &runtimepath
 " プラグイン読み込み＆キャッシュ作成
 let s:toml_file = fnamemodify(expand('<sfile>'), ':h').'/dein.toml'
+let s:lazy_toml_file = fnamemodify(expand('<sfile>'), ':h').'/dein_lazy.toml'
 if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir, [$MYVIMRC, s:toml_file])
-  call dein#load_toml(s:toml_file)
+  call dein#begin(s:dein_dir, [s:toml_file, s:lazy_toml_file])
+  call dein#load_toml(s:toml_file, {'lazy': 0})
+  call dein#load_toml(s:lazy_toml_file, {'lazy': 1})
   call dein#end()
   call dein#save_state()
 endif
 
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 " 不足プラグインの自動インストール
 if has('vim_starting') && dein#check_install()
   call dein#install()
 endif
+
+let g:python3_host_prog = expand('$HOME') . '/.pyenv/shims/python3'
 
 " colorsheme
 syntax on
@@ -198,3 +202,6 @@ let g:syntastic_go_checkers = ['go', 'golint']
 
 " for digdag
 au BufNewFile,BufRead *.dig            setf yaml
+
+" for NERDTree
+autocmd vimenter * NERDTree

@@ -1,0 +1,26 @@
+# for golang
+[[plugins]]
+repo = 'fatih/vim-go'
+[[plugins]]
+repo = 'vim-jp/vim-go-extra'
+
+# for python
+[[plugins]]
+repo = 'hynek/vim-python-pep8-indent'
+on_ft = 'python'
+[[plugins]]
+repo = 'tell-k/vim-autopep8'
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+on_ft = 'python'
+on_source = ['vim-pyenv']
+hook_add = '''
+  autocmd FileType python setlocal completeopt-=preview
+'''
+[[plugins]]
+repo = 'lambdalisue/vim-pyenv'
+# depends = ['davidhalter/jedi-vim']
+on_ft = 'python'
+[[plugins]]
+repo = 'jmcantrell/vim-virtualenv'
+on_ft = 'python'
