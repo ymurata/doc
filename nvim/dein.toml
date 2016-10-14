@@ -29,12 +29,12 @@ repo = 'scrooloose/nerdtree'
 [[plugins]]
 repo = 'scrooloose/syntastic'
 
+[[plugins]] # カーソル位置のコンテキストのftを判定するライブラリ
+repo = 'Shougo/context_filetype.vim'
+
 [[plugins]] # カーソル位置のコンテキストに合わせてftを切り替える
 repo = 'osyo-manga/vim-precious'
 depends = ['context_filetype.vim']
-
-[[plugins]] # カーソル位置のコンテキストのftを判定するライブラリ
-repo = 'Shougo/context_filetype.vim'
 
 [[plugins]] # toml syntax
 repo = 'cespare/vim-toml'
@@ -55,23 +55,8 @@ repo = 'Yggdroot/indentLine'
 [[plugins]] # hybrid
 repo = 'w0ng/vim-hybrid'
 
-# for python
-# [[plugins]]
-# repo = 'hynek/vim-python-pep8-indent'
-# on_ft = 'python'
+# for golang
 [[plugins]]
-repo = 'tell-k/vim-autopep8'
+repo = 'fatih/vim-go'
 [[plugins]]
-repo = 'davidhalter/jedi-vim'
-on_ft = 'python'
-on_source = ['vim-pyenv']
-hook_add = '''
-  autocmd FileType python setlocal completeopt-=preview
-'''
-[[plugins]]
-repo = 'lambdalisue/vim-pyenv'
-depends = ['davidhalter/jedi-vim']
-on_ft = 'python'
-[[plugins]]
-repo = 'jmcantrell/vim-virtualenv'
-on_ft = 'python'
+repo = 'vim-jp/vim-go-extra'

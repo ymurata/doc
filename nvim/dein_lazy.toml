@@ -1,9 +1,3 @@
-# for golang
-[[plugins]]
-repo = 'fatih/vim-go'
-[[plugins]]
-repo = 'vim-jp/vim-go-extra'
-
 # for python
 [[plugins]]
 repo = 'hynek/vim-python-pep8-indent'
@@ -24,3 +18,4 @@ on_ft = 'python'
 [[plugins]]
 repo = 'jmcantrell/vim-virtualenv'
 on_ft = 'python'
+

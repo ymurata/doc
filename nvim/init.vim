@@ -27,8 +27,6 @@ if dein#load_state(s:dein_dir)
   call dein#save_state()
 endif
 
-" let g:deoplete#enable_at_startup = 1
-
 " 不足プラグインの自動インストール
 if has('vim_starting') && dein#check_install()
   call dein#install()
@@ -128,6 +126,7 @@ nnoremap <S-Down>  <C-w>+<CR>
 cmap w!! w !sudo tee > /dev/null %
 
 " NERDTree の設定
+autocmd vimenter * NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 let g:NERDTreeDirArrows=0
 let g:NERDTreeMouseMode=0
@@ -184,25 +183,33 @@ endfunction
 " Shift + F で自動修正
 autocmd FileType python nnoremap <S-f> :call Autopep8()<CR>
 
-" for golang
-" golint のプラグイン
-set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
-filetype plugin on
-" gocode を実行する
-exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
-" golang の補完内容の詳細表示
-set completeopt=menu,preview
-" golang のファイル保存時に Linter を実行
-autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow 
-" go format
-autocmd BufWritePre *.go Fmt
-
 let g:syntastic_mode_map = { 'mode': 'passive',
     \ 'active_filetypes': ['go', 'python'] }
-let g:syntastic_go_checkers = ['go', 'golint']
+
+" for golang
+let g:syntastic_go_checkers = ['golint', 'gotype', 'govet', 'go']
+" vim-go
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_term_enabled = 1
+let g:go_highlight_build_constraints = 1
+
+augroup GolangSettings
+  autocmd!
+  autocmd FileType go nmap <leader>gb <Plug>(go-build)
+  autocmd FileType go nmap <leader>gt <Plug>(go-test)
+  autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
+  autocmd FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+  autocmd FileType go nmap <Leader>dt <Plug>(go-def-tab)
+  autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
+  autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+  autocmd FileType go :highlight goErr cterm=bold ctermfg=214
+  autocmd FileType go :match goErr /\<err\>/
+augroup END
 
 " for digdag
 au BufNewFile,BufRead *.dig            setf yaml
 
-" for NERDTree
-autocmd vimenter * NERDTree
