@@ -27,4 +27,3 @@ on_ft = 'python'
 [[plugins]]
 repo = 'jmcantrell/vim-virtualenv'
 on_ft = 'python'
-
