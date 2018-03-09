@@ -6,3 +6,5 @@ hook_add = '''
   autocmd FileType python setlocal completeopt-=preview
   let g:jedi#use_tabs_not_buffers = 1
 '''
+[[plugins]]
+repo = 'tell-k/vim-autopep8'
