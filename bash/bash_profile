@@ -10,25 +10,13 @@ alias ps='ps --sort=start_time'
 alias vim=nvim
 
 # 環境変数
-#export PATH=$PATH:/sbin:/usr/sbin # パス
-#export PAGER='/usr/bin/lv -c' # man とかで使われる
-#export EDITOR='/usr/bin/vim' # visudo とかで使われる
 export HISTSIZE=100000 # これだけコマンド履歴を残す
 export LANG='ja_JP.UTF-8' # 以下 3 つ文字コード
 export LC_ALL='ja_JP.UTF-8'
 export LC_MESSAGES='ja_JP.UTF-8'
 
 # for neovim
-export XDG_CONFIG_HOME=$HOME/.config
-
-# for python
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-
+export XDG_CONFIG_HOME=$HOME/.nvim
 
 # for Golang
 # export GOROOT=/usr/local/opt/go/libexec
@@ -38,19 +26,8 @@ export PATH=$PATH:$GOPATH/bin
 # for node
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
-# for postgres
-#PATH=$PATH:$HOME/bin:/usr/local/pgsql/bin
-#export POSTGRES_HOME=/usr/local/pgsql
-#export PGDATA=/data/pgdata
-#export PGLIB=$POSTGRES_HOME/lib
-#export LD_LIBRARY_PATH=$POSTGRES_HOME/lib
-
 # for embulk
 export PATH="$HOME/.embulk/bin:$PATH"
-
-# for ant
-export ANT_HOME="/usr/local/bin/ant/"
-export PATH="$PATH:$ANT_HOME/bin"
 
 # for ruby
 export PATH="$HOME/.rbenv/bin:$PATH"

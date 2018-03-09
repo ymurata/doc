@@ -6,10 +6,7 @@ repo = 'Shougo/deoplete.nvim'
 hook_add = 'let g:deoplete#enable_at_startup = 1'
 
 [[plugins]]
-repo = 'Shougo/Unite.vim'
-
-#[[plugins]]
-#repo = 'Shougo/vimproc'
+repo = 'Shougo/vimproc.vim'
 
 [[plugins]]
 repo = 'Shougo/unite-outline'
@@ -18,66 +15,27 @@ repo = 'Shougo/unite-outline'
 repo = 'thinca/vim-quickrun'
 
 [[plugins]]
-repo = 'kana/vim-smartinput'
-
-[[plugins]]
-repo = 'kana/vim-operator-user'
-
-[[plugins]]
-repo = 'kana/vim-textobj-user'
+repo = 'w0ng/vim-hybrid'
 
 [[plugins]]
 repo = 'scrooloose/nerdtree'
 
 [[plugins]]
-repo = 'scrooloose/syntastic'
-
-[[plugins]] # カーソル位置のコンテキストのftを判定するライブラリ
 repo = 'Shougo/context_filetype.vim'
 
-[[plugins]] # カーソル位置のコンテキストに合わせてftを切り替える
+[[plugins]]
 repo = 'osyo-manga/vim-precious'
 depends = ['context_filetype.vim']
 
 [[plugins]]
-repo = 'ervandew/supertab'
-
-[[plugins]] # toml syntax
-repo = 'cespare/vim-toml'
-on_ft = 'toml'
-
-[[plugins]]
-repo = 'tpope/vim-surround'
-
-[[plugins]]
-repo = 'tyru/caw.vim.git'
-
-[[plugins]]
-repo = 'vim-scripts/Align'
+repo = 'Townk/vim-autoclose'
+on_i = 1
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'
 
-[[plugins]] # hybrid
-repo = 'w0ng/vim-hybrid'
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
 
-# for golang
 [[plugins]]
-repo = 'fatih/vim-go'
-[[plugins]]
-repo = 'vim-jp/vim-go-extra'
-
-# for js and react
-[[plugins]]
-repo = 'othree/yajs.vim'
-[[plugins]]
-repo = 'maxmellon/vim-jsx-pretty'
-[[plugins]]
-repo = 'othree/es.next.syntax.vim'
-[[plugins]]
-repo = 'othree/javascript-libraries-syntax.vim'
-[[plugins]]
-repo = 'othree/html5.vim'
-# [[plugins]]
-# repo = 'ternjs/tern_for_vim'
-# on_ft = ['javascript', 'javascript.jsx']
+repo = 'ervandew/supertab'

@@ -1,0 +1,8 @@
+[[plugins]]
+repo = 'zchee/deoplete-jedi'
+on_i = 1
+on_ft = ['python', 'python3']
+hook_add = '''
+  autocmd FileType python setlocal completeopt-=preview
+  let g:jedi#use_tabs_not_buffers = 1
+'''
