@@ -5,6 +5,8 @@ on_ft = ['python', 'python3']
 hook_add = '''
   autocmd FileType python setlocal completeopt-=preview
   let g:jedi#use_tabs_not_buffers = 1
+  let g:python_host_prog = '/usr/local/bin/python'
+  let g:python3_host_prog = '/usr/local/bin/python3'
 '''
 [[plugins]]
 repo = 'tell-k/vim-autopep8'
