@@ -39,3 +39,6 @@ repo = 'bronson/vim-trailing-whitespace'
 
 [[plugins]]
 repo = 'ervandew/supertab'
+
+[[plugins]]
+repo = 'neomake/neomake'

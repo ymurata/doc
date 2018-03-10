@@ -11,7 +11,7 @@ if dein#load_state('~/.cache/dein')
   call dein#load_toml('~/.nvim/nvim/dein.toml', {'lazy': 0})
   call dein#load_toml('~/.nvim/nvim/dein_lazy.toml', {'lazy': 1})
   call dein#load_toml('~/.nvim/nvim/dein_python.toml', {'lazy': 1})
-  " call dein#load_toml('~/.nvim/nvim/dein_go.toml',     {'lazy': 1})
+  call dein#load_toml('~/.nvim/nvim/dein_go.toml', {'lazy': 1})
   " call dein#load_toml('~/.nvim/nvim/dein_php.toml',     {'lazy': 1})
 
   call dein#end()
@@ -171,3 +171,26 @@ function! Autopep8()
     call Preserve(':silent %!autopep8 -')
 endfunction
 autocmd FileType python nnoremap <S-f> :call Autopep8()<CR>
+
+" fatih/vim-go
+let g:syntastic_go_checkers = ['golint', 'gotype', 'govet', 'go']
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_term_enabled = 1
+let g:go_highlight_build_constraints = 1
+
+augroup GolangSettings
+  autocmd!
+  autocmd FileType go nmap <leader>gb <Plug>(go-build)
+  autocmd FileType go nmap <leader>gt <Plug>(go-test)
+  autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
+  autocmd FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+  autocmd FileType go nmap <Leader>dt <Plug>(go-def-tab)
+  autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
+  autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+  autocmd FileType go :highlight goErr cterm=bold ctermfg=214
+  autocmd FileType go :match goErr /\<err\>/
+augroup END
