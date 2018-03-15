@@ -12,6 +12,8 @@ if dein#load_state('~/.cache/dein')
   call dein#load_toml('~/.nvim/nvim/dein_lazy.toml', {'lazy': 1})
   call dein#load_toml('~/.nvim/nvim/dein_python.toml', {'lazy': 1})
   call dein#load_toml('~/.nvim/nvim/dein_go.toml', {'lazy': 1})
+  call dein#load_toml('~/.nvim/nvim/dein_front.toml', {'lazy': 1})
+  call dein#load_toml('~/.nvim/nvim/dein_elixir.toml', {'lazy': 1})
   " call dein#load_toml('~/.nvim/nvim/dein_php.toml',     {'lazy': 1})
 
   call dein#end()
@@ -194,3 +196,6 @@ augroup GolangSettings
   autocmd FileType go :highlight goErr cterm=bold ctermfg=214
   autocmd FileType go :match goErr /\<err\>/
 augroup END
+
+" for vue syntax
+autocmd BufNewFile,BufRead *.{html,htm,vue*} set filetype=html

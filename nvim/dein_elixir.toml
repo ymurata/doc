@@ -1,0 +1,7 @@
+[[plugins]]
+repo = 'elixir-lang/vim-elixir'
+on_ft = ['elixir']
+
+[[plugins]]
+repo = 'ecpplus/vim-phoenix'
+on_ft = ['elixir']
