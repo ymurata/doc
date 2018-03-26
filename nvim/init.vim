@@ -14,6 +14,7 @@ if dein#load_state('~/.cache/dein')
   call dein#load_toml('~/.nvim/nvim/dein_go.toml', {'lazy': 1})
   call dein#load_toml('~/.nvim/nvim/dein_front.toml', {'lazy': 1})
   call dein#load_toml('~/.nvim/nvim/dein_elixir.toml', {'lazy': 1})
+  call dein#load_toml('~/.nvim/nvim/dein_ruby.toml', {'lazy': 1})
   " call dein#load_toml('~/.nvim/nvim/dein_php.toml',     {'lazy': 1})
 
   call dein#end()
@@ -174,16 +175,6 @@ function! Autopep8()
 endfunction
 autocmd FileType python nnoremap <S-f> :call Autopep8()<CR>
 
-" fatih/vim-go
-let g:syntastic_go_checkers = ['golint', 'gotype', 'govet', 'go']
-let g:go_fmt_command = "goimports"
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_term_enabled = 1
-let g:go_highlight_build_constraints = 1
-
 augroup GolangSettings
   autocmd!
   autocmd FileType go nmap <leader>gb <Plug>(go-build)
@@ -199,3 +190,8 @@ augroup END
 
 " for vue syntax
 autocmd BufNewFile,BufRead *.{html,htm,vue*} set filetype=html
+
+" elmcast/elm-vim
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:elm_syntastic_show_warnings = 1

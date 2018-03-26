@@ -1,0 +1,5 @@
+[[plugins]]
+repo = 'tpope/vim-endwise'
+
+[[plugins]]
+repo = 'todesking/ruby_hl_lvar.vim'

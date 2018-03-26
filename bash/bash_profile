@@ -19,7 +19,6 @@ export LC_MESSAGES='ja_JP.UTF-8'
 export XDG_CONFIG_HOME=$HOME/.nvim
 
 # for Golang
-# export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOPATH/bin
 
