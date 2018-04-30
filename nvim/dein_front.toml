@@ -1,3 +1,15 @@
 [[plugins]]
 repo = 'elmcast/elm-vim'
 on_ft = ['elm']
+
+[[plugins]]
+repo = 'HerringtonDarkholme/yats.vim'
+on_ft = ['typescript']
+
+[[plugins]]
+repo = 'mhartington/nvim-typescript'
+on_ft = ['typescript']
+hook_add = '''
+  let g:nvim_typescript#javascript_support = 1
+  autocmd BufNewFile,BufRead *.ts set filetype=typescript
+'''

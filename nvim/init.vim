@@ -16,7 +16,6 @@ if dein#load_state('~/.cache/dein')
   call dein#load_toml('~/.nvim/nvim/dein_elixir.toml', {'lazy': 1})
   call dein#load_toml('~/.nvim/nvim/dein_ruby.toml', {'lazy': 1})
   " call dein#load_toml('~/.nvim/nvim/dein_php.toml',     {'lazy': 1})
-
   call dein#end()
   call dein#save_state()
 endif
