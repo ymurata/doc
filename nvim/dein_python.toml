@@ -5,8 +5,33 @@ on_ft = ['python', 'python3']
 hook_add = '''
   autocmd FileType python setlocal completeopt-=preview
   let g:jedi#use_tabs_not_buffers = 1
-  let g:python_host_prog = '/usr/local/bin/python'
   let g:python3_host_prog = '/usr/local/bin/python3'
 '''
 [[plugins]]
 repo = 'tell-k/vim-autopep8'
+hook_add = '''
+  let g:syntastic_python_flake8_args = "--ignore=E501 --max-complexity 10"
+  function! Preserve(command)
+      " Save the last search.
+      let search = @/
+      " Save the current cursor position.
+      let cursor_position = getpos('.')
+      " Save the current window position.
+      normal! H
+      let window_position = getpos('.')
+      call setpos('.', cursor_position)
+      " Execute the command.
+      execute a:command
+      " Restore the last search.
+      let @/ = search
+      " Restore the previous window position.
+      call setpos('.', window_position)
+      normal! zt
+      " Restore the previous cursor position.
+      call setpos('.', cursor_position)
+  endfunction
+  function! Autopep8()
+      call Preserve(':silent %!autopep8 --ignore=E501 -')
+  endfunction
+  autocmd FileType python nnoremap <S-f> :call Autopep8()<CR>
+'''

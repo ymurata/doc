@@ -22,8 +22,10 @@ export XDG_CONFIG_HOME=$HOME/.nvim
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOPATH/bin
 
-# for node
-export PATH=$HOME/.nodebrew/current/bin:$PATH
+# # for node
+# export PATH=$HOME/.nodebrew/current/bin:$PATH
+export PATH="${HOME}/.ndenv/bin:${PATH}"
+eval "$(ndenv init -)"
 
 # for embulk
 export PATH="$HOME/.embulk/bin:$PATH"
