@@ -37,3 +37,9 @@ eval "$(rbenv init -)"
 # for php
 export PATH="/Users/yuma/.phpenv/bin:$PATH"
 eval "$(phpenv init -)"
+
+# for android
+export PATH=${PATH}:/Users/yuma/Library/Android/sdk/platform-tools:/Users/yuma/Library/Android/sdk/tools
+export JAVA_HOME=$(/usr/libexec/java_home)
+export PATH=${JAVA_HOME}/bin:$PATH
+export PATH=/usr/local/bin:$PATH
