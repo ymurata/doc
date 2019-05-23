@@ -40,8 +40,19 @@ repo = 'bronson/vim-trailing-whitespace'
 [[plugins]]
 repo = 'ervandew/supertab'
 
+# [[plugins]]
+# repo = 'neomake/neomake'
+# hook_add = '''
+#   autocmd! BufWritePost * Neomake
+# '''
 [[plugins]]
-repo = 'neomake/neomake'
-hook_add = '''
-  autocmd! BufWritePost * Neomake
+repo = 'w0rp/ale'
+hoo_add = '''
+    let g:ale_linters = {
+      \ 'html': [],
+      \ 'css': ['stylelint'],
+      \ 'javascript': ['eslint'],
+      \ 'vue': ['eslint']
+      \ }
+    let g:ale_linter_aliases = {'vue': 'css'}
 '''

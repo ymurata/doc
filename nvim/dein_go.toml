@@ -8,7 +8,7 @@ hook_source = '''
     \ 'append_file': 0,
     \ 'errorformat': '%f:%l:%c:\ %m, %f:%l:%c\ %#%m',
     \ }
-  let g:neomake_go_enabled_makers = ['golint', 'govet', 'errcheck', 'go']
+  let g:neomake_go_enabled_makers = ['golint', 'govet', 'go']
   let g:go_highlight_functions = 1
   let g:go_highlight_methods = 1
   let g:go_highlight_structs = 1

@@ -161,6 +161,3 @@ augroup GolangSettings
   autocmd FileType go :highlight goErr cterm=bold ctermfg=214
   autocmd FileType go :match goErr /\<err\>/
 augroup END
-
-" for vue syntax
-autocmd BufNewFile,BufRead *.{html,htm,vue*} set filetype=html
