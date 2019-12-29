@@ -1,4 +1,8 @@
 #doc
+
+.bash_profile の読み込み
+https://superuser.com/questions/320065/bashrc-not-sourced-in-iterm-mac-os-x
+
 vim のインストール手順
 http://qiita.com/puriketu99/items/1c32d3f24cc2919203eb
 

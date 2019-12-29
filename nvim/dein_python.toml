@@ -5,7 +5,7 @@ on_ft = ['python', 'python3']
 hook_add = '''
   autocmd FileType python setlocal completeopt-=preview
   let g:jedi#use_tabs_not_buffers = 1
-  let g:python3_host_prog = '/usr/local/bin/python3'
+  let g:python3_host_prog = expand('$HOME') . '/.pyenv/shims/python3'
 '''
 [[plugins]]
 repo = 'tell-k/vim-autopep8'
