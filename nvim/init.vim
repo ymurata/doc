@@ -13,8 +13,8 @@ if dein#load_state('~/.cache/dein')
   call dein#load_toml('~/.nvim/nvim/dein_python.toml', {'lazy': 1})
   call dein#load_toml('~/.nvim/nvim/dein_go.toml', {'lazy': 1})
   call dein#load_toml('~/.nvim/nvim/dein_front.toml', {'lazy': 1})
-  call dein#load_toml('~/.nvim/nvim/dein_elixir.toml', {'lazy': 1})
-  call dein#load_toml('~/.nvim/nvim/dein_ruby.toml', {'lazy': 1})
+  " call dein#load_toml('~/.nvim/nvim/dein_elixir.toml', {'lazy': 1})
+  " call dein#load_toml('~/.nvim/nvim/dein_ruby.toml', {'lazy': 1})
   " call dein#load_toml('~/.nvim/nvim/dein_php.toml',     {'lazy': 1})
   call dein#end()
   call dein#save_state()
@@ -140,24 +140,22 @@ autocmd MyAutoCmd QuickfixCmdPost make,grep,grepadd,vimgrep copen
 " QuickFix および Help では q でバッファを閉じる
 autocmd MyAutoCmd FileType help,qf nnoremap <buffer> q <C-w>c
 
-"" plugins 設定
-" Yggdroot/indentLine
-let g:indentLine_color_term = 111
-let g:indentLine_color_gui = '#708090'
-let g:indentLine_char = '┆'
-
-" ervandew/supertab
-let g:SuperTabDefaultCompletionType = 'context'
-
 augroup GolangSettings
   autocmd!
-  autocmd FileType go nmap <leader>gb <Plug>(go-build)
-  autocmd FileType go nmap <leader>gt <Plug>(go-test)
-  autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
-  autocmd FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-  autocmd FileType go nmap <Leader>dt <Plug>(go-def-tab)
-  autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
-  autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+  " autocmd FileType go nmap <leader>gb <Plug>(go-build)
+  " autocmd FileType go nmap <leader>gt <Plug>(go-test)
+  " autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
+  " autocmd FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+  " autocmd FileType go nmap <Leader>dt <Plug>(go-def-tab)
+  " autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
+  " autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
   autocmd FileType go :highlight goErr cterm=bold ctermfg=214
   autocmd FileType go :match goErr /\<err\>/
 augroup END
+
+
+""" for tsx
+"" light-grey
+"hi tsxTypeBraces guifg=#999999
+"" dark-grey
+"hi tsxTypes guifg=#666666
