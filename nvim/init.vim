@@ -67,12 +67,6 @@ set wrap
 " 自動的に改行が入るのを無効化
 set textwidth=0
 
-" NERDTree の設定
-autocmd vimenter * NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-let g:NERDTreeDirArrows=0
-let g:NERDTreeMouseMode=0
-
 "" 検索設定
 " 検索オプション
 set ignorecase " 大文字小文字を区別しない
@@ -152,10 +146,3 @@ augroup GolangSettings
   autocmd FileType go :highlight goErr cterm=bold ctermfg=214
   autocmd FileType go :match goErr /\<err\>/
 augroup END
-
-
-""" for tsx
-"" light-grey
-"hi tsxTypeBraces guifg=#999999
-"" dark-grey
-"hi tsxTypes guifg=#666666

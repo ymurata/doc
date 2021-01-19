@@ -1,12 +1,20 @@
+# [[plugins]]
+# repo = 'deoplete-plugins/deoplete-jedi'
+# on_i = 1
+# on_ft = ['python', 'python3']
+# hook_add = '''
+#   autocmd FileType python setlocal completeopt-=preview
+#   let g:jedi#use_tabs_not_buffers = 1
+#   let g:python3_host_prog = expand('$HOME') . '/.pyenv/shims/python3'
+# '''
+
 [[plugins]]
-repo = 'zchee/deoplete-jedi'
-on_i = 1
-on_ft = ['python', 'python3']
+repo = 'davidhalter/jedi-vim'
+on_ft = 'python'
 hook_add = '''
-  autocmd FileType python setlocal completeopt-=preview
-  let g:jedi#use_tabs_not_buffers = 1
-  let g:python3_host_prog = expand('$HOME') . '/.pyenv/shims/python3'
+  let g:jedi#force_py_version = 'auto'
 '''
+
 [[plugins]]
 repo = 'tell-k/vim-autopep8'
 hook_add = '''

@@ -1,41 +1,26 @@
-[[plugins]]
-repo = 'dense-analysis/ale'
-hoo_add = '''
-  let g:ale_fix_on_save = 1
-  let g:ale_completion_autoimport = 1
-  let g:ale_linters = {
-    \ 'html': [],
-    \ 'css': ['stylelint'],
-    \ 'javascript': ['eslint'],
-    \ 'typescript': ['eslint', 'tsserver']
-    \ 'vue': ['eslint']
-    \ }
-  let g:ale_linter_aliases = {'vue': 'css'}
-'''
-
 # [[plugins]]
 # repo = 'prettier/vim-prettier'
 # build = 'npm install'
-# on_ft = ['javascript', 'typescript', 'vue', 'css', 'scss', 'json', 'markdown']
+# on_ft = ['javascript', 'typescript', 'css', 'scss', 'json', 'markdown']
 # hook_add = '''
 #   let g:prettier#autoformat = 0
 #   let g:prettier#quickfix_enabled = 0
-#   autocmd BufWritePre *.js,*.ts,*.vue,*.css,*.scss,*.json,*.md PrettierAsync
+#   autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 # '''
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
 on_ft = ['typescript']
 hook_add = '''
-  autocmd BufRead,BufNewFile *.ts set filetype=typescript
+  autocmd BufRead,BufNewFile *.ts,*.tsx set filetype=typescript
 '''
 
-# [[plugins]]
-# repo = 'peitalin/vim-jsx-typescript'
-# on_ft = ['typescript']
-# hook_add = '''
-#   autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
-# '''
+[[plugins]]
+repo = 'peitalin/vim-jsx-typescript'
+on_ft = ['typescript']
+hook_add = '''
+  autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+'''
 
 # [[plugins]]
 # repo = 'mhartington/nvim-typescript'
