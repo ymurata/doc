@@ -3,7 +3,7 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/Users/yuma/.cache/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=/Users/ymurata/.cache/dein/repos/github.com/Shougo/dein.vim
 
 if dein#load_state('~/.cache/dein')
   call dein#begin('~/.cache/dein')
