@@ -1,0 +1,36 @@
+[
+    // split 及び vsplit した場合のエディター間を移動する設定
+    {
+        "key": "ctrl+h",
+        "command": "workbench.action.focusLeftGroup"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.focusRightGroup"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "workbench.action.focusAboveGroup"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.focusBelowGroup"
+    },
+    // サイドバーからエディターを移動する設定
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "explorerViewletVisible && filesExplorerFocus"
+    },
+    // ターミナルとエディターを移動する設定
+    {
+          "key": "ctrl+t",
+          "command": "workbench.action.terminal.focus",
+          "when": "editorTextFocus"
+    },
+    {
+      "key": "ctrl+t",
+      "command": "workbench.action.focusActiveEditorGroup",
+      "when": "terminalFocus"
+    }
+]
