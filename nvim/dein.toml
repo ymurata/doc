@@ -50,12 +50,6 @@ hook_add = '''
 repo = 'bronson/vim-trailing-whitespace'
 
 [[plugins]]
-repo = 'ervandew/supertab'
-hook_add = '''
-  let g:SuperTabDefaultCompletionType = 'context'
-'''
-
-[[plugins]]
 repo = 'neomake/neomake'
 hook_add = '''
   autocmd! BufWritePost,BufEnter * Neomake

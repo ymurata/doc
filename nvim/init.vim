@@ -1,80 +1,111 @@
-if &compatible
-  set nocompatible
-endif
-
-" Required:
-set runtimepath+=/Users/ymurata/.cache/dein/repos/github.com/Shougo/dein.vim
-
-if dein#load_state('~/.cache/dein')
-  call dein#begin('~/.cache/dein')
-  " toml ファイルを追加する
-  call dein#load_toml('~/.nvim/nvim/dein.toml', {'lazy': 0})
-  call dein#load_toml('~/.nvim/nvim/dein_lazy.toml', {'lazy': 1})
-  call dein#load_toml('~/.nvim/nvim/dein_python.toml', {'lazy': 1})
-  call dein#load_toml('~/.nvim/nvim/dein_go.toml', {'lazy': 1})
-  call dein#load_toml('~/.nvim/nvim/dein_front.toml', {'lazy': 1})
-  " call dein#load_toml('~/.nvim/nvim/dein_elixir.toml', {'lazy': 1})
-  " call dein#load_toml('~/.nvim/nvim/dein_ruby.toml', {'lazy': 1})
-  " call dein#load_toml('~/.nvim/nvim/dein_php.toml',     {'lazy': 1})
-  call dein#end()
-  call dein#save_state()
-endif
-
-" Required:
+" ============================================================
+" 基本設定
+" ============================================================
+set nocompatible
+set encoding=utf-8
 filetype plugin indent on
-syntax enable
 
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
 
-" nvim の基本設定
-" カラースキーム
-syntax on
-set background=dark
-let g:hybrid_use_iTerm_colors = 1
-colorscheme hybrid
+" ============================================================
+" プラグイン管理 (terminal のみ)
+" ============================================================
+if exists('g:vscode')
+  " VSCode Neovim 拡張から起動した場合は何もしない
+else
+  let s:dein_dir      = expand('~/.cache/dein')
+  let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-"クリップボード共有
-if has("clipboard")
-  vmap ,y "+y
-  nmap ,p "+gp
-  " exclude:{pattern} must be last ^= prepend += append
-  if has("gui_running") || has("xterm_clipboard")
-    silent! set clipboard^=unnamedplus
-    set clipboard^=unnamed
+  if &runtimepath !~# '/dein.vim'
+    execute 'set runtimepath+=' . s:dein_repo_dir
+  endif
+
+  if dein#load_state(s:dein_dir)
+    call dein#begin(s:dein_dir)
+
+    let s:toml_dir = expand('~/.config/nvim')
+    call dein#load_toml(s:toml_dir . '/dein.toml',         {'lazy': 0})
+    call dein#load_toml(s:toml_dir . '/dein_lazy.toml',    {'lazy': 1})
+    call dein#load_toml(s:toml_dir . '/dein_flutter.toml',    {'lazy': 0})
+    call dein#load_toml(s:toml_dir . '/dein_typescript.toml', {'lazy': 0})
+
+    call dein#end()
+    call dein#save_state()
+  endif
+
+  " 未インストールのプラグインがあれば自動インストール
+  if dein#check_install()
+    call dein#install()
   endif
 endif
-set clipboard+=unnamed
-
-" Swap ファイルと Backup ファイルの無効化
-set nowritebackup
-set nobackup
-set noswapfile
 
 
-" 不可視文字の可視化
-set list
+" ============================================================
+" 表示設定
+" ============================================================
+syntax enable
+set background=dark
+set number        " 行番号を表示
+set wrap          " 長い行を折り返す
+set list          " 不可視文字を可視化
 set listchars=tab:>-,trail:-,extends:>,precedes:<,nbsp:%
 
-" 行番号の表示
-set number
+" カラースキーム (terminal のみ: プラグインが必要)
+if !exists('g:vscode')
+  let g:hybrid_use_iTerm_colors = 1
+  colorscheme hybrid
+endif
 
-" 長いテキストの折り返し
-set wrap
 
-" 自動的に改行が入るのを無効化
-set textwidth=0
+" ============================================================
+" 検索設定
+" ============================================================
+set ignorecase   " 大文字小文字を区別しない
+set smartcase    " 検索文字に大文字がある場合は区別する
+set wrapscan     " 末尾まで検索したら先頭に戻る
+set hlsearch     " 検索語をハイライト表示
+set incsearch    " インクリメンタルサーチ
+set inccommand=split  " 置換をインタラクティブにプレビュー
 
-"" 検索設定
-" 検索オプション
-set ignorecase " 大文字小文字を区別しない
-set smartcase  " 検索文字に大文字がある場合は大文字小文字を区別
-set incsearch  " インクリメンタルサーチ
-set hlsearch   " 検索マッチテキストをハイライト
 
-" 検索後にジャンプした際に検索単語を画面中央に持ってくる
+" ============================================================
+" 編集・インデント設定
+" ============================================================
+set expandtab     " タブをスペースに変換
+set tabstop=4     " タブ幅
+set softtabstop=4 " 入力時のタブ幅
+set shiftwidth=4  " 自動インデント幅
+set autoindent    " 自動インデント
+set textwidth=0   " 自動改行を無効化
+set backspace=indent,eol,start  " バックスペースで何でも消せるようにする
+set hidden        " 未保存バッファがあっても別バッファに切り替え可能
+set clipboard+=unnamedplus      " クリップボード連携
+
+
+" ============================================================
+" ファイル・履歴設定
+" ============================================================
+set history=1000   " コマンド履歴の保持数
+set noswapfile     " swap ファイルを作成しない
+set noundofile     " undo ファイルを作成しない
+set nobackup       " backup ファイルを作成しない
+set nowritebackup  " writebackup ファイルを作成しない
+set viminfo=       " viminfo ファイルに保存しない
+
+
+" ============================================================
+" キーマップ
+" ============================================================
+" ESC を2回押してハイライトを消去
+nmap <silent> <Esc><Esc> :nohlsearch<CR>
+
+" jj で Insert モードを抜ける
+inoremap jj <Esc>
+
+" j / k を折り返し行でも自然に動作させる
+nnoremap j gj
+nnoremap k gk
+
+" 検索ジャンプ後に画面中央に移動
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap * *zz
@@ -82,35 +113,10 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
-"" 編集設定
-" tab をスペースに変換する
-set expandtab
-set tabstop=4
-set shiftwidth=4
-set autoindent
-
-" バックスラッシュやクエスチョンを状況に合わせ自動的にエスケープ
-cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
-cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
-
-" キーバインド設定
-" w!! でスーパーユーザーとして保存（sudoが使える環境限定）
-cmap w!! w !sudo tee > /dev/null %
-
-" 入力モード中に素早くjjと入力した場合はESCとみなす
-inoremap jj <Esc>
-
-" ESCを二回押すことでハイライトを消す
-nmap <silent> <Esc><Esc> :nohlsearch<CR>
-
-" j, k による移動を折り返されたテキストでも自然に振る舞うように変更
-nnoremap j gj
-nnoremap k gk
-
-" vを二回で行末まで選択
+" v を2回押して行末まで選択
 vnoremap v $h
 
-" TABにて対応ペアにジャンプ
+" Tab で対応するペアにジャンプ
 nnoremap <Tab> %
 vnoremap <Tab> %
 
@@ -120,29 +126,30 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 if has('nvim')
-    nmap <BS> <C-W>h
+  nmap <BS> <C-W>h
 endif
 
-" reset augroup
+" / ? をコマンドラインで自動エスケープ
+cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
+cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+
+" w!! でスーパーユーザーとして保存
+cmap w!! w !sudo tee > /dev/null %
+
+
+" ============================================================
+" 自動コマンド
+" ============================================================
 augroup MyAutoCmd
   autocmd!
+  " make / grep 後に自動的に QuickFix を開く
+  autocmd QuickfixCmdPost make,grep,grepadd,vimgrep copen
+  " QuickFix / Help では q でバッファを閉じる
+  autocmd FileType help,qf nnoremap <buffer> q <C-w>c
 augroup END
-
-" make, grep などのコマンド後に自動的に QuickFix を開く
-autocmd MyAutoCmd QuickfixCmdPost make,grep,grepadd,vimgrep copen
-
-" QuickFix および Help では q でバッファを閉じる
-autocmd MyAutoCmd FileType help,qf nnoremap <buffer> q <C-w>c
 
 augroup GolangSettings
   autocmd!
-  " autocmd FileType go nmap <leader>gb <Plug>(go-build)
-  " autocmd FileType go nmap <leader>gt <Plug>(go-test)
-  " autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
-  " autocmd FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-  " autocmd FileType go nmap <Leader>dt <Plug>(go-def-tab)
-  " autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
-  " autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-  autocmd FileType go :highlight goErr cterm=bold ctermfg=214
-  autocmd FileType go :match goErr /\<err\>/
+  autocmd FileType go highlight goErr cterm=bold ctermfg=214
+  autocmd FileType go match goErr /\<err\>/
 augroup END
