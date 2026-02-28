@@ -1,45 +1,103 @@
-# [[plugins]]
-# repo = 'deoplete-plugins/deoplete-jedi'
-# on_i = 1
-# on_ft = ['python', 'python3']
-# hook_add = '''
-#   autocmd FileType python setlocal completeopt-=preview
-#   let g:jedi#use_tabs_not_buffers = 1
-#   let g:python3_host_prog = expand('$HOME') . '/.pyenv/shims/python3'
-# '''
-
+# ============================================================
+# LSP 基盤
+# ============================================================
 [[plugins]]
-repo = 'davidhalter/jedi-vim'
-on_ft = 'python'
-hook_add = '''
-  let g:jedi#force_py_version = 'auto'
+repo = 'neovim/nvim-lspconfig'
+on_ft = ['python']
+hook_source = '''
+  lua << EOF
+  require('lspconfig').pyright.setup({
+    settings = {
+      python = {
+        analysis = {
+          typeCheckingMode = "basic",
+          autoImportCompletions = true,
+        }
+      }
+    }
+  })
+EOF
+'''
+
+# ============================================================
+# 補完エンジン (nvim-cmp)
+# ============================================================
+[[plugins]]
+repo = 'hrsh7th/nvim-cmp'
+on_ft = ['python']
+depends = ['nvim-lspconfig', 'cmp-nvim-lsp', 'cmp-buffer', 'cmp-path', 'LuaSnip', 'cmp_luasnip']
+hook_source = '''
+  lua << EOF
+  local cmp = require('cmp')
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body)
+      end,
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<CR>']      = cmp.mapping.confirm({ select = true }),
+      ['<Tab>']     = cmp.mapping.select_next_item(),
+      ['<S-Tab>']   = cmp.mapping.select_prev_item(),
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' },
+      { name = 'buffer' },
+      { name = 'path' },
+    }),
+  })
+EOF
 '''
 
 [[plugins]]
-repo = 'tell-k/vim-autopep8'
-hook_add = '''
-  let g:syntastic_python_flake8_args = "--ignore=E501 --max-complexity 10"
-  function! Preserve(command)
-      " Save the last search.
-      let search = @/
-      " Save the current cursor position.
-      let cursor_position = getpos('.')
-      " Save the current window position.
-      normal! H
-      let window_position = getpos('.')
-      call setpos('.', cursor_position)
-      " Execute the command.
-      execute a:command
-      " Restore the last search.
-      let @/ = search
-      " Restore the previous window position.
-      call setpos('.', window_position)
-      normal! zt
-      " Restore the previous cursor position.
-      call setpos('.', cursor_position)
-  endfunction
-  function! Autopep8()
-      call Preserve(':silent %!autopep8 --ignore=E501 -')
-  endfunction
-  autocmd FileType python nnoremap <S-f> :call Autopep8()<CR>
+repo = 'hrsh7th/cmp-nvim-lsp'
+
+[[plugins]]
+repo = 'hrsh7th/cmp-buffer'
+
+[[plugins]]
+repo = 'hrsh7th/cmp-path'
+
+[[plugins]]
+repo = 'L3MON4D3/LuaSnip'
+
+[[plugins]]
+repo = 'saadparwaiz1/cmp_luasnip'
+
+# ============================================================
+# フォーマット (black / isort)
+# ============================================================
+[[plugins]]
+repo = 'stevearc/conform.nvim'
+on_ft = ['python']
+hook_source = '''
+  lua << EOF
+  require('conform').setup({
+    formatters_by_ft = {
+      python = { 'isort', 'autopep8' },
+    },
+    format_on_save = {
+      timeout_ms = 3000,
+      lsp_fallback = true,
+    },
+  })
+EOF
+'''
+
+# ============================================================
+# シンタックスハイライト (treesitter)
+# ============================================================
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+on_ft = ['python']
+hook_source = '''
+  lua << EOF
+  require('nvim-treesitter.configs').setup({
+    ensure_installed = { 'python' },
+    highlight = { enable = true },
+    indent    = { enable = true },
+  })
+EOF
 '''
