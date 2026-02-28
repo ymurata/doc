@@ -1,6 +1,45 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+# ============================================================
+# LSP
+# ============================================================
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+
+# ============================================================
+# 補完エンジン
+# ============================================================
+[[plugins]]
+repo = 'hrsh7th/nvim-cmp'
+
+[[plugins]]
+repo = 'hrsh7th/cmp-nvim-lsp'
+
+[[plugins]]
+repo = 'hrsh7th/cmp-buffer'
+
+[[plugins]]
+repo = 'hrsh7th/cmp-path'
+
+[[plugins]]
+repo = 'L3MON4D3/LuaSnip'
+
+[[plugins]]
+repo = 'saadparwaiz1/cmp_luasnip'
+
+# ============================================================
+# フォーマット
+# ============================================================
+[[plugins]]
+repo = 'stevearc/conform.nvim'
+
+# ============================================================
+# シンタックスハイライト
+# ============================================================
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
 hook_add = 'let g:deoplete#enable_at_startup = 1'

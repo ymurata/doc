@@ -1,103 +1,39 @@
 # ============================================================
-# LSP 基盤
+# LSP 基盤・補完・フォーマット・treesitter は dein.toml で管理
+# ============================================================
+
+# ============================================================
+# Python LSP (pyright)
 # ============================================================
 [[plugins]]
-repo = 'neovim/nvim-lspconfig'
-on_ft = ['python']
-hook_source = '''
-  lua << EOF
-  require('lspconfig').pyright.setup({
-    settings = {
-      python = {
-        analysis = {
-          typeCheckingMode = "basic",
-          autoImportCompletions = true,
-        }
-      }
-    }
-  })
-EOF
+repo = 'davidhalter/jedi-vim'
+on_ft = 'python'
+hook_add = '''
+  let g:jedi#force_py_version = 'auto'
+  let g:jedi#completions_enabled = 0
 '''
 
 # ============================================================
-# 補完エンジン (nvim-cmp)
+# Python フォーマット
 # ============================================================
 [[plugins]]
-repo = 'hrsh7th/nvim-cmp'
-on_ft = ['python']
-depends = ['nvim-lspconfig', 'cmp-nvim-lsp', 'cmp-buffer', 'cmp-path', 'LuaSnip', 'cmp_luasnip']
-hook_source = '''
-  lua << EOF
-  local cmp = require('cmp')
-  cmp.setup({
-    snippet = {
-      expand = function(args)
-        require('luasnip').lsp_expand(args.body)
-      end,
-    },
-    mapping = cmp.mapping.preset.insert({
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<CR>']      = cmp.mapping.confirm({ select = true }),
-      ['<Tab>']     = cmp.mapping.select_next_item(),
-      ['<S-Tab>']   = cmp.mapping.select_prev_item(),
-    }),
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'luasnip' },
-      { name = 'buffer' },
-      { name = 'path' },
-    }),
-  })
-EOF
-'''
+repo = 'tell-k/vim-autopep8'
+on_ft = 'python'
+hook_add = '''
+  let g:syntastic_python_flake8_args = "--ignore=E501 --max-complexity 10"
 
-[[plugins]]
-repo = 'hrsh7th/cmp-nvim-lsp'
+  function! Autopep8()
+    let l:search = @/
+    let l:cursor = getpos('.')
+    normal! H
+    let l:window = getpos('.')
+    call setpos('.', l:cursor)
+    silent %!autopep8 --ignore=E501 -
+    let @/ = l:search
+    call setpos('.', l:window)
+    normal! zt
+    call setpos('.', l:cursor)
+  endfunction
 
-[[plugins]]
-repo = 'hrsh7th/cmp-buffer'
-
-[[plugins]]
-repo = 'hrsh7th/cmp-path'
-
-[[plugins]]
-repo = 'L3MON4D3/LuaSnip'
-
-[[plugins]]
-repo = 'saadparwaiz1/cmp_luasnip'
-
-# ============================================================
-# フォーマット (black / isort)
-# ============================================================
-[[plugins]]
-repo = 'stevearc/conform.nvim'
-on_ft = ['python']
-hook_source = '''
-  lua << EOF
-  require('conform').setup({
-    formatters_by_ft = {
-      python = { 'isort', 'autopep8' },
-    },
-    format_on_save = {
-      timeout_ms = 3000,
-      lsp_fallback = true,
-    },
-  })
-EOF
-'''
-
-# ============================================================
-# シンタックスハイライト (treesitter)
-# ============================================================
-[[plugins]]
-repo = 'nvim-treesitter/nvim-treesitter'
-on_ft = ['python']
-hook_source = '''
-  lua << EOF
-  require('nvim-treesitter.configs').setup({
-    ensure_installed = { 'python' },
-    highlight = { enable = true },
-    indent    = { enable = true },
-  })
-EOF
+  autocmd FileType python nnoremap <S-f> :call Autopep8()<CR>
 '''

@@ -1,79 +1,15 @@
 # ============================================================
-# LSP (typescript-language-server)
-# dein_python.toml で nvim-lspconfig 導入済みのため設定のみ追加
+# TypeScript / JavaScript シンタックス
 # ============================================================
 [[plugins]]
-repo = 'neovim/nvim-lspconfig'
-on_ft = ['typescript', 'typescriptreact', 'javascript', 'javascriptreact']
-hook_source = '''
-  lua << EOF
-  local lspconfig = require('lspconfig')
+repo = 'leafgarland/typescript-vim'
+on_ft = ['typescript', 'typescriptreact']
 
-  lspconfig.ts_ls.setup({
-    settings = {
-      typescript = {
-        inlayHints = {
-          includeInlayParameterNameHints = 'all',
-          includeInlayReturnTypeHints = true,
-        }
-      }
-    }
-  })
-
-  lspconfig.eslint.setup({
-    on_attach = function(_, bufnr)
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        buffer = bufnr,
-        command = 'EslintFixAll',
-      })
-    end,
-  })
-EOF
-'''
-
-# ============================================================
-# フォーマット (prettier)
-# dein_python.toml で conform.nvim 導入済みのため設定のみ追加
-# ============================================================
 [[plugins]]
-repo = 'stevearc/conform.nvim'
-on_ft = ['typescript', 'typescriptreact', 'javascript', 'javascriptreact', 'css', 'scss', 'json', 'markdown']
-hook_source = '''
-  lua << EOF
-  require('conform').setup({
-    formatters_by_ft = {
-      typescript      = { 'prettier' },
-      typescriptreact = { 'prettier' },
-      javascript      = { 'prettier' },
-      javascriptreact = { 'prettier' },
-      css             = { 'prettier' },
-      scss            = { 'prettier' },
-      json            = { 'prettier' },
-      markdown        = { 'prettier' },
-    },
-    format_on_save = {
-      timeout_ms   = 3000,
-      lsp_fallback = true,
-    },
-  })
-EOF
-'''
-
-# ============================================================
-# シンタックスハイライト (treesitter)
-# dein_python.toml で treesitter 導入済みのため言語のみ追加
-# ============================================================
-[[plugins]]
-repo = 'nvim-treesitter/nvim-treesitter'
-on_ft = ['typescript', 'typescriptreact', 'javascript', 'javascriptreact']
-hook_source = '''
-  lua << EOF
-  require('nvim-treesitter.configs').setup({
-    ensure_installed = { 'typescript', 'tsx', 'javascript' },
-    highlight = { enable = true },
-    indent    = { enable = true },
-  })
-EOF
+repo = 'peitalin/vim-jsx-typescript'
+on_ft = ['typescript', 'typescriptreact']
+hook_add = '''
+  autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 '''
 
 # ============================================================

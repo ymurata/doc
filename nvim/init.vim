@@ -25,8 +25,8 @@ else
     let s:toml_dir = expand('~/repos/doc/nvim')
     call dein#load_toml(s:toml_dir . '/dein.toml',        {'lazy': 0})
     call dein#load_toml(s:toml_dir . '/dein_lazy.toml',   {'lazy': 1})
-    call dein#load_toml(s:toml_dir . '/dein_python.toml', {'lazy': 1})
-    call dein#load_toml(s:toml_dir . '/dein_front.toml',  {'lazy': 1})
+    call dein#load_toml(s:toml_dir . '/dein_python.toml', {'lazy': 0})
+    call dein#load_toml(s:toml_dir . '/dein_front.toml',  {'lazy': 0})
 
     call dein#end()
     call dein#save_state()
@@ -140,6 +140,76 @@ cmap w!! w !sudo tee > /dev/null %
 " ============================================================
 " 自動コマンド
 " ============================================================
+" ============================================================
+" LSP / 補完 / フォーマット / treesitter
+" ============================================================
+lua << EOF
+-- LSP (pyright)
+vim.lsp.config('pyright', {
+  root_dir = function(bufnr, cb)
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+    local root = vim.fs.root(fname, { 'pyrightconfig.json', 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', '.git' })
+    cb(root or vim.fn.expand('%:p:h'))
+  end,
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = 'basic',
+        autoImportCompletions = true,
+      }
+    }
+  }
+})
+vim.lsp.enable('pyright')
+
+-- LSP (typescript)
+vim.lsp.config('ts_ls', {})
+vim.lsp.enable('ts_ls')
+
+-- 補完 (nvim-cmp)
+local cmp = require('cmp')
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>']      = cmp.mapping.confirm({ select = true }),
+    ['<Tab>']     = cmp.mapping.select_next_item(),
+    ['<S-Tab>']   = cmp.mapping.select_prev_item(),
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+    { name = 'buffer' },
+    { name = 'path' },
+  }),
+})
+
+-- フォーマット (conform)
+require('conform').setup({
+  formatters_by_ft = {
+    python          = { 'isort', 'autopep8' },
+    typescript      = { 'prettier' },
+    typescriptreact = { 'prettier' },
+    javascript      = { 'prettier' },
+    javascriptreact = { 'prettier' },
+    css             = { 'prettier' },
+    json            = { 'prettier' },
+  },
+  format_on_save = {
+    timeout_ms   = 3000,
+    lsp_fallback = true,
+  },
+})
+
+EOF
+
+" treesitter は VimEnter 後に設定
+autocmd VimEnter * lua require('nvim-treesitter.config').setup({ ensure_installed = { 'python', 'typescript', 'tsx', 'javascript' }, highlight = { enable = true }, indent = { enable = true } })
+
 augroup MyAutoCmd
   autocmd!
   " make / grep 後に自動的に QuickFix を開く
