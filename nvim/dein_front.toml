@@ -1,26 +1,6 @@
 # ============================================================
-# TypeScript / JavaScript シンタックス
-# ============================================================
-[[plugins]]
-repo = 'leafgarland/typescript-vim'
-on_ft = ['typescript', 'typescriptreact']
-
-[[plugins]]
-repo = 'peitalin/vim-jsx-typescript'
-on_ft = ['typescript', 'typescriptreact']
-hook_add = '''
-  autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
-'''
-
-# ============================================================
 # JSX / TSX タグの自動補完
 # ============================================================
 [[plugins]]
 repo = 'windwp/nvim-ts-autotag'
-on_ft = ['typescript', 'typescriptreact', 'javascript', 'javascriptreact']
 depends = ['nvim-treesitter']
-hook_source = '''
-  lua << EOF
-  require('nvim-ts-autotag').setup()
-EOF
-'''

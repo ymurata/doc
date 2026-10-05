@@ -3,39 +3,40 @@
 " ============================================================
 set nocompatible
 set encoding=utf-8
+
+" リモートプラグイン用の外部言語プロバイダを使わない
+let g:loaded_python3_provider = 0
+let g:loaded_node_provider    = 0
+let g:loaded_ruby_provider    = 0
+let g:loaded_perl_provider    = 0
+
 filetype plugin indent on
 
 
 " ============================================================
-" プラグイン管理 (terminal のみ)
+" プラグイン管理
 " ============================================================
-if exists('g:vscode')
-  " VSCode Neovim 拡張から起動した場合は何もしない
-else
-  let s:dein_dir      = expand('~/.cache/dein')
-  let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+let s:dein_dir      = expand('~/.cache/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-  if &runtimepath !~# '/dein.vim'
-    execute 'set runtimepath+=' . s:dein_repo_dir
-  endif
+if &runtimepath !~# '/dein.vim'
+  execute 'set runtimepath+=' . s:dein_repo_dir
+endif
 
-  if dein#load_state(s:dein_dir)
-    call dein#begin(s:dein_dir)
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
-    let s:toml_dir = expand('~/repos/doc/nvim')
-    call dein#load_toml(s:toml_dir . '/dein.toml',        {'lazy': 0})
-    call dein#load_toml(s:toml_dir . '/dein_lazy.toml',   {'lazy': 1})
-    call dein#load_toml(s:toml_dir . '/dein_python.toml', {'lazy': 0})
-    call dein#load_toml(s:toml_dir . '/dein_front.toml',  {'lazy': 0})
+  let s:toml_dir = stdpath('config')
+  call dein#load_toml(s:toml_dir . '/dein.toml',       {'lazy': 0})
+  call dein#load_toml(s:toml_dir . '/dein_front.toml', {'lazy': 0})
 
-    call dein#end()
-    call dein#save_state()
-  endif
+  call dein#end()
+  call dein#save_state()
+endif
 
-  " 未インストールのプラグインがあれば自動インストール
-  if dein#check_install()
-    call dein#install()
-  endif
+" 未インストールのプラグインがあれば自動インストール
+if dein#check_install()
+  call dein#install()
 endif
 
 
@@ -49,11 +50,8 @@ set wrap          " 長い行を折り返す
 set list          " 不可視文字を可視化
 set listchars=tab:>-,trail:-,extends:>,precedes:<,nbsp:%
 
-" カラースキーム (terminal のみ: プラグインが必要)
-if !exists('g:vscode')
-  let g:hybrid_use_iTerm_colors = 1
-  colorscheme hybrid
-endif
+let g:hybrid_use_iTerm_colors = 1
+colorscheme hybrid
 
 
 " ============================================================
@@ -138,9 +136,6 @@ cmap w!! w !sudo tee > /dev/null %
 
 
 " ============================================================
-" 自動コマンド
-" ============================================================
-" ============================================================
 " LSP / 補完 / フォーマット / treesitter
 " ============================================================
 lua << EOF
@@ -163,8 +158,7 @@ vim.lsp.config('pyright', {
 vim.lsp.enable('pyright')
 
 -- LSP (typescript)
-vim.lsp.config('ts_ls', {})
-vim.lsp.enable('ts_ls')
+vim.lsp.enable('tsc')
 
 -- 補完 (nvim-cmp)
 local cmp = require('cmp')
@@ -205,11 +199,19 @@ require('conform').setup({
   },
 })
 
+-- treesitter
+require('nvim-treesitter.configs').setup({
+  ensure_installed = { 'python', 'typescript', 'tsx', 'javascript' },
+  highlight = { enable = true },
+  indent    = { enable = true },
+})
+
+require('nvim-ts-autotag').setup()
 EOF
 
-" treesitter は VimEnter 後に設定
-autocmd VimEnter * lua require('nvim-treesitter.config').setup({ ensure_installed = { 'python', 'typescript', 'tsx', 'javascript' }, highlight = { enable = true }, indent = { enable = true } })
-
+" ============================================================
+" 自動コマンド
+" ============================================================
 augroup MyAutoCmd
   autocmd!
   " make / grep 後に自動的に QuickFix を開く
