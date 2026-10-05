@@ -19,10 +19,10 @@ git clone https://github.com/Shougo/dein.vim ~/.cache/dein/repos/github.com/Shou
 
 ```
 mise use -g python@3.12.13 node@24.13.1 go@1.25.5 uv@0.12.0
-mise use -g npm:pyright npm:typescript-language-server npm:typescript@6 npm:prettier pipx:isort pipx:autopep8
+mise use -g npm:pyright npm:typescript@7 npm:prettier pipx:isort pipx:autopep8
 ```
 
-uv は mise が pipx: のツールをインストールするのに使う。2 行目は nvim の LSP (pyright, ts_ls) と conform のフォーマッタ
+uv は mise が pipx: のツールをインストールするのに使う。2 行目は nvim の LSP (pyright, TypeScript 7 の tsc --lsp) と conform のフォーマッタ
 
 nvim の初回起動時に dein がプラグインをインストールする。インストール前に設定が読み込まれてエラーが出るため、初回は nvim を起動し直す。treesitter のパーサのビルドには C コンパイラ (Xcode Command Line Tools) が必要。
 

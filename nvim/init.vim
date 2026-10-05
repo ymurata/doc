@@ -159,17 +159,7 @@ vim.lsp.config('pyright', {
 vim.lsp.enable('pyright')
 
 -- LSP (typescript)
--- typescript-language-server は TypeScript 本体を同梱しない。
--- プロジェクトの node_modules に typescript が無いときは mise で入れた npm:typescript を使う。
-vim.lsp.config('ts_ls', {
-  before_init = function(params)
-    local typescript_dir = vim.trim(vim.fn.system({ 'mise', 'where', 'npm:typescript' }))
-    params.initializationOptions.tsserver = {
-      fallbackPath = typescript_dir .. '/lib/node_modules/typescript/lib',
-    }
-  end,
-})
-vim.lsp.enable('ts_ls')
+vim.lsp.enable('tsc')
 
 -- 補完 (nvim-cmp)
 local cmp = require('cmp')
