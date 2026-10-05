@@ -3,10 +3,4 @@
 # ============================================================
 [[plugins]]
 repo = 'windwp/nvim-ts-autotag'
-on_ft = ['typescript', 'typescriptreact', 'javascript', 'javascriptreact']
 depends = ['nvim-treesitter']
-hook_source = '''
-  lua << EOF
-  require('nvim-ts-autotag').setup()
-EOF
-'''

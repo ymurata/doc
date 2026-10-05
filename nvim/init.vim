@@ -28,7 +28,6 @@ if dein#load_state(s:dein_dir)
 
   let s:toml_dir = stdpath('config')
   call dein#load_toml(s:toml_dir . '/dein.toml',       {'lazy': 0})
-  call dein#load_toml(s:toml_dir . '/dein_lazy.toml',  {'lazy': 1})
   call dein#load_toml(s:toml_dir . '/dein_front.toml', {'lazy': 0})
 
   call dein#end()
@@ -206,6 +205,8 @@ require('nvim-treesitter.configs').setup({
   highlight = { enable = true },
   indent    = { enable = true },
 })
+
+require('nvim-ts-autotag').setup()
 EOF
 
 " ============================================================
