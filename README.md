@@ -53,6 +53,8 @@ ln -s ~/repos/ymurata/doc/cursor/cli-config.json ~/.cursor/cli-config.json
 - Claude Code は、作業ディレクトリかその上位に CLAUDE.md が無い場合にだけ AGENTS.md を読む。ユーザースコープの AGENTS.md を読むという記載は公式に無いため、CLAUDE.md から `@` で import している (https://code.claude.com/docs/en/memory)。
 - Cursor の User Rules はファイルでは管理できず、UI (Settings → Rules) で設定する。agents/AGENTS.md の内容を貼り付ける。プロジェクト側の AGENTS.md は Cursor も読む。
 - Cursor で端末全体にファイルで設定できるのは `~/.cursor/mcp.json` と `~/.cursor/cli-config.json` のみ。mcp.json は使う MCP サーバーが決まってから追加する。
+- デフォルトモデルは opus (effort は公式推奨の medium)。haiku は autoCompactWindow を 100000 にしている。公式に haiku 向けの推奨値は無く、値は任意に選んだもの
+- サブエージェントのモデルを親のモデル別に制限する設定は公式に無いため、claude/CLAUDE.md に指示として書いている (強制力は無い)
 - permissions は deny → ask → allow の順に評価される。必要になったら allow を足す。
 
 ### memory の棚卸し
