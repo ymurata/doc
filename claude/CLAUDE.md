@@ -5,7 +5,7 @@
 
 - opus: opus、sonnet、haiku
 - sonnet: sonnet、haiku
-- haiku: 制限なし (指定しない)
+- haiku: haiku
 
 自分より上位のモデルのサブエージェントは起動しない。
 
