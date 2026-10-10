@@ -39,5 +39,8 @@
       "Bash(git push -f *)",
       "Bash(git reset --hard *)"
     ]
+  },
+  "enabledPlugins": {
+    "skill-creator@anthropic-plugin-directory": true
   }
 }

@@ -24,3 +24,7 @@ export PATH="$HOME/bin:$PATH" # for Cursor CLI
 
 # mise.toml のあるディレクトリではその版を、それ以外では ~/.config/mise/config.toml の版を使う
 eval "$(mise activate bash --shims)"
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/ymurata/.local/bin:$PATH"
