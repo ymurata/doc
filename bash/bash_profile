@@ -19,12 +19,8 @@ export LC_MESSAGES='ja_JP.UTF-8'
 
 export PATH="$PATH:$HOME/development/flutter/bin"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH" # for Claude Code
-export PATH="$HOME/bin:$PATH" # for Cursor CLI
+export PATH="$HOME/.local/bin:$PATH" # for Claude Code, Cursor CLI, Antigravity CLI
 
 # mise.toml のあるディレクトリではその版を、それ以外では ~/.config/mise/config.toml の版を使う
 eval "$(mise activate bash --shims)"
 
-
-# Added by Antigravity CLI installer
-export PATH="$HOME/.local/bin:$PATH"
