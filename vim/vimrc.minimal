@@ -1,0 +1,8 @@
+" macOS 標準の vim 用の最小設定 (nvim は nvim/init.vim を使う)
+set nocompatible
+set encoding=utf-8
+
+set noswapfile     " swap ファイルを作成しない
+set noundofile     " undo ファイルを作成しない
+set nobackup       " backup ファイルを作成しない
+set nowritebackup  " writebackup ファイルを作成しない
