@@ -1,4 +1,4 @@
-#doc
+# doc
 
 .bash_profile の読み込み
 https://superuser.com/questions/320065/bashrc-not-sourced-in-iterm-mac-os-x
