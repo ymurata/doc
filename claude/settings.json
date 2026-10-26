@@ -41,6 +41,22 @@
     ]
   },
   "enabledPlugins": {
-    "skill-creator@anthropic-plugin-directory": true
+    "skill-creator@anthropic-plugin-directory": true,
+    "codex@openai-codex": true,
+    "mattpocock-skills@mattpocock": true
+  },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    },
+    "mattpocock": {
+      "source": {
+        "source": "github",
+        "repo": "mattpocock/skills"
+      }
+    }
   }
 }
