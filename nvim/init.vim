@@ -200,10 +200,13 @@ require('conform').setup({
 })
 
 -- treesitter
-require('nvim-treesitter.configs').setup({
-  ensure_installed = { 'python', 'typescript', 'tsx', 'javascript' },
-  highlight = { enable = true },
-  indent    = { enable = true },
+require('nvim-treesitter').install({ 'python', 'typescript', 'tsx', 'javascript' })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern  = { 'python', 'typescript', 'typescriptreact', 'javascript' },
+  callback = function()
+    vim.treesitter.start()
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
 })
 
 require('nvim-ts-autotag').setup()
