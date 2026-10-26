@@ -39,7 +39,8 @@ repo = 'stevearc/conform.nvim'
 # ============================================================
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
-rev = 'master'
+rev = 'main'
+hook_post_update = 'TSUpdate'
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
