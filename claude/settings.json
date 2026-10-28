@@ -40,6 +40,18 @@
       "Bash(git reset --hard *)"
     ]
   },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/repos/ymurata/doc/claude/hooks/session-status-title.sh"
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
     "skill-creator@anthropic-plugin-directory": true,
     "codex@openai-codex": true,
