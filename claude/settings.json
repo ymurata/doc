@@ -46,7 +46,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "~/repos/ymurata/doc/claude/hooks/session-status-title.sh"
+            "command": "~/.claude/hooks/session-status-title.sh"
           }
         ]
       }

@@ -37,7 +37,8 @@ nvim/dein_go.toml, dein_ruby.toml, dein_elixir.toml, dein_flutter.toml は init.
 | --- | --- | --- |
 | agents/AGENTS.md | ~/.claude/AGENTS.md | 全プロジェクト共通の指示 (正本) |
 | claude/CLAUDE.md | ~/.claude/CLAUDE.md | `@~/.claude/AGENTS.md` を import する |
-| claude/settings.json | ~/.claude/settings.json | 言語、permissions、memory の設定 |
+| claude/settings.json | ~/.claude/settings.json | 言語、permissions、memory、hooks の設定 |
+| claude/hooks/ | ~/.claude/hooks | settings.json の hooks から呼ぶスクリプト |
 | cursor/cli-config.json | ~/.cursor/cli-config.json | Cursor CLI の permissions |
 
 ```
@@ -45,6 +46,7 @@ mkdir -p ~/.claude ~/.cursor
 ln -s ~/repos/ymurata/doc/agents/AGENTS.md ~/.claude/AGENTS.md
 ln -s ~/repos/ymurata/doc/claude/CLAUDE.md ~/.claude/CLAUDE.md
 ln -s ~/repos/ymurata/doc/claude/settings.json ~/.claude/settings.json
+ln -s ~/repos/ymurata/doc/claude/hooks ~/.claude/hooks
 ln -s ~/repos/ymurata/doc/cursor/cli-config.json ~/.cursor/cli-config.json
 ```
 
