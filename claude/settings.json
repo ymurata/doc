@@ -16,6 +16,9 @@
   "theme": "dark",
   "language": "japanese",
   "cleanupPeriodDays": 90,
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_CODE_MODE": "1"
+  },
   "autoMemoryEnabled": true,
   "permissions": {
     "allow": [
